@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import com.test.spr4.impl.dao.HibDao;
 import com.test.spr4.service.TestService;
 
 @Configuration
@@ -16,4 +17,9 @@ public class BaseConfig {
 		return new TestService();
 	}
 	
+	@Bean(name="HibDao")
+	public HibDao getHibDao()
+	{
+		return new HibDao();
+	}
 }
