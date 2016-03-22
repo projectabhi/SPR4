@@ -12,7 +12,7 @@ import com.test.spr4.service.TestService;
  */
 public class App 
 {
-	static Logger log=Logger.getLogger(App.class);
+	private static Logger log=Logger.getLogger(App.class);
 	
     public static void main( String[] args )
     {

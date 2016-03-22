@@ -10,10 +10,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.test.spr4.entity.Login;
+
 @Transactional
 public class HibDao {
 
-	static Logger log=Logger.getLogger(HibDao.class);
+	private static Logger log=Logger.getLogger(HibDao.class);
 	
 	@Resource(name="sessionFactory")
 	public SessionFactory sessionFactory;
@@ -25,7 +27,7 @@ public class HibDao {
 
 	public void getUsers()
 	{
-		List list=getSession().createSQLQuery("SELECT * FROM LOGIN").list();
-		log.info(list.toString());
+		List list=(List) getSession().get(Login.class, 1L);
+		log.info(list.get(0));
 	}
 }
