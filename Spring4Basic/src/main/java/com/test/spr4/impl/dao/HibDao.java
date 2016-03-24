@@ -1,10 +1,12 @@
 package com.test.spr4.impl.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,16 @@ public class HibDao {
 
 	public void getUsers()
 	{
-		List list=(List) getSession().get(Login.class, 1L);
-		log.info(list.get(0));
-	}
+		Query query=this.getSession().createQuery("from Login");
+		List<Login> loginList=query.list();
+		for(Login login:loginList)
+		{
+			log.info("Id:"+login.getLoginId());
+			log.info("First Name:"+login.getFirstName());
+			log.info("Last Name:"+login.getLastName());
+			log.info("User Id:"+login.getUsername());
+			log.info("Pass:"+login.getPassword());
+			log.info("Role:"+login.getUserRole());
+		}
+ 	}
 }

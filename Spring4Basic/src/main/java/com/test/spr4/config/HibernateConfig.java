@@ -18,12 +18,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"com.test.spr4.config"})
 @PropertySource(value = {"classpath:application.properties"})
 public class HibernateConfig {
 
 	@Autowired
-    private Environment environment;
+	private Environment environment;
 	
 	@Bean(name="sessionFactory")
     public LocalSessionFactoryBean sessionFactory() {
@@ -59,4 +58,5 @@ public class HibernateConfig {
        txManager.setSessionFactory(s);
        return txManager;
     }
+
 }
