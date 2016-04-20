@@ -9,7 +9,7 @@
 
   <name>Spring4Basic</name>
   <url>http://maven.apache.org</url>
-
+	
   <properties>
      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
      <springframework.version>4.0.6.RELEASE</springframework.version>
@@ -24,6 +24,13 @@
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>HibernateJpa</groupId>
+  		<artifactId>HibernateJpa</artifactId>
+  		<version>1.0.0</version>
+  		<scope>provided</scope>
     </dependency>
      <!-- Spring -->
         <dependency>
@@ -89,7 +96,6 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc14</artifactId>
             <version>10.2.0</version>
-            <scope>provided</scope>
         </dependency>
         
         <!-- Logging -->

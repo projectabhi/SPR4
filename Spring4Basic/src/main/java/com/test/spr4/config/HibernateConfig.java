@@ -24,11 +24,20 @@ public class HibernateConfig {
 	@Autowired
 	private Environment environment;
 	
+	
+	public Environment getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
 	@Bean(name="sessionFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] {"com.test.spr4.entity"});
+        sessionFactory.setPackagesToScan(new String[] {"com.test.jpa.entity"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
      }
