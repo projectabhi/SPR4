@@ -63,7 +63,7 @@ public class HibDao {
 		login.setFirstName("Gunjeeta");
 		login.setLastName("Dey");
 		login.setPassword("gungun");
-		login.setUsername("KHEYA");
+		login.setUsername("BOLTU");
 		login.setUserRole("SUPERUSER");
 		LoginDetail loginDetail=new LoginDetail();
 		loginDetail.setLoginDate(new Timestamp(System.currentTimeMillis()));

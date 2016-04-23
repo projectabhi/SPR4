@@ -2,7 +2,9 @@ package com.test.spr4.Spring4Basic;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 
+import com.test.jpa.entity.Login;
 import com.test.spr4.config.BaseConfig;
 import com.test.spr4.config.HibernateConfig;
 import com.test.spr4.impl.dao.HibDao;
@@ -26,6 +28,8 @@ public class App
         TestService test=(TestService)ctx.getBean("hello");
         log.info(test.sayHello("Abhijit"));
         HibDao hibDao=(HibDao)ctx.getBean("HibDao");
+        hibDao.getUsers();
+        hibDao.saveLogin(new Login());
         hibDao.getUsers();
     }
 }
