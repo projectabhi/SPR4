@@ -1,8 +1,9 @@
-package com.abhi.config;
+package com.abhi.spring4.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,7 +13,8 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages="abhi.spring.controller")
+@ComponentScan(basePackages="com.abhi.spring4")
+@Import({MessagingConfiguration.class,MessagingListnerConfiguration.class})
 public class AppConfig extends WebMvcConfigurerAdapter{
 
 	@Bean
@@ -22,7 +24,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
-		return  viewResolver;
+		return viewResolver;
 	}
 	
 	@Override

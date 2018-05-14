@@ -1,4 +1,4 @@
-package com.abhi.config;
+package com.abhi.spring4.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -7,8 +7,9 @@ import javax.servlet.ServletRegistration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class AppInitializer implements WebApplicationInitializer{
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer implements WebApplicationInitializer {
 
 	public void onStartup(ServletContext container) throws ServletException {
 
@@ -20,6 +21,25 @@ public class AppInitializer implements WebApplicationInitializer{
 
 		servlet.setLoadOnStartup(1);
 		servlet.addMapping("/");
+	}
+
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		// TODO Auto-generated method stub
+		return new Class[] { AppConfig.class };
+		//return null;
+	}
+
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		// TODO Auto-generated method stub
+		return new String[] { "/" };
 	}
 
 }

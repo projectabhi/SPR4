@@ -1,4 +1,4 @@
-package abhi.spring.controller;
+package com.abhi.spring4.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
