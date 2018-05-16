@@ -1,6 +1,7 @@
 package com.json.spring4.pojo;
 
 public class Name {
+	//Updae
 	private String firstName;
 	private String middleName;
 	private String lastName;

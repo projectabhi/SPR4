@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.json.spring4.service.Profile;
 
 public class College {
+	//Updae
 	@JsonView(Profile.PublicView.class)
 	private String colName;
 	@JsonView(Profile.FriendsView.class)

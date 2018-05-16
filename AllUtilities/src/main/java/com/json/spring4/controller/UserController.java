@@ -20,6 +20,7 @@ import com.json.spring4.service.UserService;
 @RestController
 @RequestMapping("/app")
 public class UserController {
+	//Updae
 	@Autowired
 	private UserService userService;
 	@JsonView(Profile.PublicView.class)

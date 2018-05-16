@@ -3,6 +3,7 @@ package com.json.spring4.pojo;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.json.spring4.service.Profile;
 public class User {
+	//Updae
 	@JsonView(Profile.PublicView.class)		
 	private String userId;
 	private String password;	
