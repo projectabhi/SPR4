@@ -13,20 +13,29 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	public void onStartup(ServletContext container) throws ServletException {
 
+		//ActiveMQ
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
 		ctx.register(AppConfig.class);
 		ctx.setServletContext(container);
 
-		ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(ctx));
-
-		servlet.setLoadOnStartup(1);
-		servlet.addMapping("/");
+		//Jackson
+		AnnotationConfigWebApplicationContext jsonCtx = new AnnotationConfigWebApplicationContext();
+		jsonCtx.register(JsonConfig.class);
+		jsonCtx.setServletContext(container);
+		
+		ServletRegistration.Dynamic servlet1 = container.addServlet("dispatcher", new DispatcherServlet(ctx));
+		ServletRegistration.Dynamic servlet2 = container.addServlet("dispatcher", new DispatcherServlet(jsonCtx)); 
+		servlet1.setLoadOnStartup(1);
+		servlet1.addMapping("/");
+		
+		//servlet2.setLoadOnStartup(2);
+		//servlet2.addMapping("/rest");
 	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[] { AppConfig.class };
+		return new Class[] { AppConfig.class, JsonConfig.class};
 		//return null;
 	}
 
