@@ -1,50 +1,31 @@
-package com.abhi.spring4.model;
+package com.activemq.spring4.model;
 
 import java.io.Serializable;
 
-public class Order implements Serializable {
+public class InventoryResponse implements Serializable {
 
 	private String orderId;
-    
-    private String productName;
- 
-    private int quantity;
- 
-    private OrderStatus status;
- 
+    private int returnCode;
+    private String comment;
+     
     public String getOrderId() {
         return orderId;
     }
- 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
- 
-    public String getProductName() {
-        return productName;
+    public int getReturnCode() {
+        return returnCode;
     }
- 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setReturnCode(int returnCode) {
+        this.returnCode = returnCode;
     }
- 
-    public int getQuantity() {
-        return quantity;
+    public String getComment() {
+        return comment;
     }
- 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
- 
-    public OrderStatus getStatus() {
-        return status;
-    }
- 
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
- 
-     
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -52,7 +33,6 @@ public class Order implements Serializable {
         result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
         return result;
     }
- 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -61,7 +41,7 @@ public class Order implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Order other = (Order) obj;
+        InventoryResponse other = (InventoryResponse) obj;
         if (orderId == null) {
             if (other.orderId != null)
                 return false;
@@ -69,10 +49,9 @@ public class Order implements Serializable {
             return false;
         return true;
     }
- 
     @Override
     public String toString() {
-        return "Order [orderId=" + orderId + ", productName=" + productName + ", quantity=" + quantity + ", status="
-                + status + "]";
+        return "InventoryResponse [orderId=" + orderId + ", returnCode=" + returnCode + ", comment=" + comment + "]";
     }
+ 
 }

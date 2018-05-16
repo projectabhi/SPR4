@@ -1,4 +1,4 @@
-package com.abhi.spring4.messaging;
+package com.activemq.spring4.messaging;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -10,7 +10,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
-import com.abhi.spring4.model.Order;
+import com.activemq.spring4.model.Order;
 
 @Component
 public class MessageSender {

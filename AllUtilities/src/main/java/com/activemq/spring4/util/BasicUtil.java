@@ -1,4 +1,4 @@
-package com.abhi.spring4.util;
+package com.activemq.spring4.util;
 
 import java.util.UUID;
 

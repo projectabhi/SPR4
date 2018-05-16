@@ -1,4 +1,4 @@
-package com.abhi.spring4.config;
+package com.activemq.spring4.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages="com.abhi.spring4")
+@ComponentScan(basePackages="com.activemq.spring4")
 @Import({MessagingConfiguration.class,MessagingListnerConfiguration.class})
 public class AppConfig extends WebMvcConfigurerAdapter{
 

@@ -1,4 +1,4 @@
-package com.abhi.spring4.model;
+package com.activemq.spring4.model;
 
 public enum OrderStatus {
 	

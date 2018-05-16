@@ -1,12 +1,12 @@
-package com.abhi.spring4.service.impl;
+package com.activemq.spring4.service.impl;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Service;
 
-import com.abhi.spring4.model.Order;
-import com.abhi.spring4.service.OrderRepository;
+import com.activemq.spring4.model.Order;
+import com.activemq.spring4.service.OrderRepository;
 
 @Service(value="orderRepository")
 public class OrderRepositoryImpl implements OrderRepository {

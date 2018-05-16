@@ -1,4 +1,4 @@
-package com.abhi.spring4.messaging;
+package com.activemq.spring4.messaging;
 
 import javax.jms.JMSException;
 
@@ -10,8 +10,8 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 
-import com.abhi.spring4.model.InventoryResponse;
-import com.abhi.spring4.service.OrderService;
+import com.activemq.spring4.model.InventoryResponse;
+import com.activemq.spring4.service.OrderService;
 
 @Component
 public class MessageReceiver {

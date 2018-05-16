@@ -1,9 +1,9 @@
-package com.abhi.spring4.service;
+package com.activemq.spring4.service;
 
 import java.util.Map;
 
-import com.abhi.spring4.model.InventoryResponse;
-import com.abhi.spring4.model.Order;
+import com.activemq.spring4.model.InventoryResponse;
+import com.activemq.spring4.model.Order;
 
 public interface OrderService {
 

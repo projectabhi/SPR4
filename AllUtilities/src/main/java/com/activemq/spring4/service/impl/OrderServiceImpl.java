@@ -1,4 +1,4 @@
-package com.abhi.spring4.service.impl;
+package com.activemq.spring4.service.impl;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abhi.spring4.messaging.MessageSender;
-import com.abhi.spring4.model.InventoryResponse;
-import com.abhi.spring4.model.Order;
-import com.abhi.spring4.model.OrderStatus;
-import com.abhi.spring4.service.OrderRepository;
-import com.abhi.spring4.service.OrderService;
-import com.abhi.spring4.util.BasicUtil;
+import com.activemq.spring4.messaging.MessageSender;
+import com.activemq.spring4.model.InventoryResponse;
+import com.activemq.spring4.model.Order;
+import com.activemq.spring4.model.OrderStatus;
+import com.activemq.spring4.service.OrderRepository;
+import com.activemq.spring4.service.OrderService;
+import com.activemq.spring4.util.BasicUtil;
 
 @Service(value="orderService")
 public class OrderServiceImpl implements OrderService {

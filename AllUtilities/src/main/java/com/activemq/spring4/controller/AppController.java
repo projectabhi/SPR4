@@ -1,4 +1,4 @@
-package com.abhi.spring4.controller;
+package com.activemq.spring4.controller;
 
 import javax.validation.Valid;
 
@@ -9,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.abhi.spring4.model.Order;
-import com.abhi.spring4.service.OrderService;
+import com.activemq.spring4.model.Order;
+import com.activemq.spring4.service.OrderService;
 
 @Controller
 public class AppController {
