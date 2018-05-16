@@ -32,6 +32,7 @@
 				</tr>
 				</c:forEach>
 			</tbody>
+			<c:out value="${test}" />
 		</table>
 		<span class="well floatRight">
 			<a href="<c:url value='/newOrder' />">Buy More</a>

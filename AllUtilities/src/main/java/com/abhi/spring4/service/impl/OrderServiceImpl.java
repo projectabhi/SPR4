@@ -1,5 +1,6 @@
 package com.abhi.spring4.service.impl;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import com.abhi.spring4.util.BasicUtil;
 @Service(value="orderService")
 public class OrderServiceImpl implements OrderService {
 
-	static final Logger LOG = LoggerFactory.getLogger(OrderServiceImpl.class);
+	static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 	 
 	@Autowired
 	MessageSender messageSender;
@@ -28,13 +29,13 @@ public class OrderServiceImpl implements OrderService {
     
     @Override
     public void sendOrder(Order order) {
-        LOG.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    	log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
         order.setOrderId(BasicUtil.getUniqueId());
         order.setStatus(OrderStatus.CREATED);
         orderRepository.putOrder(order);
-        LOG.info("Application : sending order request {}", order);
+        log.info("Application : sending order request {}", order);
         messageSender.sendMessage(order);
-        LOG.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
  
     @Override
@@ -52,6 +53,11 @@ public class OrderServiceImpl implements OrderService {
     }
      
     public Map<String, Order> getAllOrders(){
-        return orderRepository.getAllOrders();
+    	Map<String, Order> orders= orderRepository.getAllOrders();
+    	for(Map.Entry<String, Order> entry:orders.entrySet())
+    	{
+    		log.info("Key:"+entry.getKey()+"~~Value:"+entry.getValue());
+    	}
+    	return orders;
     }
 }

@@ -44,6 +44,7 @@ public class AppController {
     @RequestMapping(value = { "/checkStatus" }, method = RequestMethod.GET)
     public String checkOrderStatus(ModelMap model) {
         model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("test", "Hi");
         return "orderStatus";
     }
 }
