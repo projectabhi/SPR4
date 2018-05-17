@@ -17,25 +17,37 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
 		ctx.register(AppConfig.class);
 		ctx.setServletContext(container);
-
+		
+		ServletRegistration.Dynamic servlet1 = container.addServlet("mq", new DispatcherServlet(ctx));
+		
 		//Jackson
 		AnnotationConfigWebApplicationContext jsonCtx = new AnnotationConfigWebApplicationContext();
 		jsonCtx.register(JsonConfig.class);
 		jsonCtx.setServletContext(container);
 		
-		ServletRegistration.Dynamic servlet1 = container.addServlet("dispatcher", new DispatcherServlet(ctx));
-		ServletRegistration.Dynamic servlet2 = container.addServlet("dispatcher", new DispatcherServlet(jsonCtx)); 
-		servlet1.setLoadOnStartup(1);
-		servlet1.addMapping("/");
+		ServletRegistration.Dynamic servlet2 = container.addServlet("rest", new DispatcherServlet(jsonCtx));
 		
-		//servlet2.setLoadOnStartup(2);
-		//servlet2.addMapping("/rest");
+		//Dashboard
+		AnnotationConfigWebApplicationContext dbrdCtx = new AnnotationConfigWebApplicationContext();
+		dbrdCtx.register(DashboardConfig.class);
+		dbrdCtx.setServletContext(container);
+				 
+		ServletRegistration.Dynamic servlet3 = container.addServlet("dashboard", new DispatcherServlet(dbrdCtx));
+		
+		servlet1.setLoadOnStartup(1);
+		servlet1.addMapping("/mq/*");
+		
+		servlet2.setLoadOnStartup(1);
+		servlet2.addMapping("/rest/*");
+		
+		servlet3.setLoadOnStartup(1);
+		servlet3.addMapping("/dashboard/*");
 	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[] { AppConfig.class, JsonConfig.class};
+		return new Class[] { AppConfig.class, JsonConfig.class, DashboardConfig.class};
 		//return null;
 	}
 

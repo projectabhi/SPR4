@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+ <button ng-click="start()">Start</button>
+ <button ng-click="stop()">Stop</button>
+ <div ng-mouseenter="start()"
+    ng-mouseleave="stop()">
+ <b ng-bind="count"></b>
+ </div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http, $timeout, $interval) {
+	$scope.count = 0;
+    $scope.ajaxPeriodicall=function() {
+        $http.get('http://localhost:8080/dashboard/services/getUserCount').success(function(data, status, headers, config) {
+            $scope.count = $scope.count + 1;
+         }); 
+    };
+    $scope.start = function() {
+       $scope.myCall = $interval($scope.ajaxPeriodicall, 1000);        
+    };
+    $scope.stop = function() {
+       $interval.cancel($scope.myCall);   
+    };
+});
+</script>
+</div>
+</body>
+</html>

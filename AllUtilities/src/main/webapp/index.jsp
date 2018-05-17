@@ -1,8 +1,13 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
-<body>
+<head>
+<script type="text/javascript">
+function loadLogin()
+{
+	window.location = "/AllUtilities/dashboard/login";
+}
+</script>
+</head>
+<body onload="loadLogin();">
 <h2>Hello World!</h2>
-<c:set var="test" value="Hi" />
-<c:out value="${test}"></c:out>
 </body>
 </html>
