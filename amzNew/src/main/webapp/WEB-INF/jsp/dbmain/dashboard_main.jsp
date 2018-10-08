@@ -1,9 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <title>13D Dashboard</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/dboard_main.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../css/custom-min.css">
 <link rel="stylesheet" href="../css/fonts.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -114,7 +118,47 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       </div>
     </div>
   </div>
-
+ <div class="tab-content">
+ 	<div id="RenderedSection" class="tab-pane fade active in">
+ 		<div id="RenderedResponseDiv" class="well-R">
+ 			<c:forEach var="item" items="${allItem.listIemSearh}">
+ 				<div class="product-box">
+ 					<a target="_blank" href="${item.detailPageURL}">
+ 						<img src="${item.mediumImgUrl}" height="160" width="120">
+ 					</a>
+ 					<div class="product-title">
+ 						<h3>${item.itemTitle}</h3>
+ 					</div>
+ 					<p class="product-price">
+ 					${item.formattedPrice}
+ 					<br>
+ 					<a target="_blank" href="${item.allOffersUrl}">More Offers</a>
+ 					</p>
+ 					<div>
+ 						<span class="a-button a-button-primary">
+ 							<a target="_blank" href="${item.detailPageURL}" style="text-decoration:none">
+ 								<span class="a-button-inner">
+ 									<img class="a-icon a-icon-shop-now" src="../img/Amazon-Favicon-64x64.png">
+ 									<input class="a-button-input" value="Add to Cart" type="submit">
+ 									<span class="a-button-text">Shop Now</span>
+ 								</span>
+							</a>
+ 						</span>
+ 					</div>
+ 				</div>
+ 			</c:forEach>
+ 			<div class="product-box" style="border:none;">
+ 				<img src="../img/more_results.png" height="160" width="120">
+ 				<div>
+ 					<h4 style="text-align:center;">
+ 						More Results
+ 						<br>
+ 					</h4>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
   <div class="w3-panel">
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-third">

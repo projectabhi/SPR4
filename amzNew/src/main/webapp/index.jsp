@@ -3,7 +3,7 @@
 <script type="text/javascript">
 function loadLogin()
 {
-	window.location = "/amzNew/dbmain/login";
+	window.location = "/dbmain/admin";
 }
 </script>
 </head>
