@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amazon.webservices.awsecommerceservice.Item;
@@ -14,6 +15,7 @@ import com.amazon.webservices.awsecommerceservice.ItemSearchRequest;
 import com.amazon.webservices.awsecommerceservice.ItemSearchResponse;
 import com.amazon.webservices.awsecommerceservice.Items;
 import com.dashboard.cxf.ws.AmazonClient;
+import com.dashboard.spring.dao.ItemDAO;
 import com.dashboard.to.ItemAllTO;
 import com.dashboard.to.ItemSearchTO;
 
@@ -22,6 +24,9 @@ public class ItemSearchService {
 
 	private Logger log=Logger.getLogger(ItemSearchService.class);
 	public static final String ASSOCIATE_TAG="amzborokali-21";
+	
+	@Autowired
+	ItemDAO itemDao;
 	
 	public ItemAllTO getDefaultItems()
 	{
@@ -44,8 +49,10 @@ public class ItemSearchService {
 		if(response != null)
 		{
 			defaultItems = response.getItems();
-			if(defaultItems != null)
+			if(defaultItems != null && !defaultItems.isEmpty()){
 				allItem =new ItemAllTO();
+				allItem.setMoreResultUrl(defaultItems.get(0).getMoreSearchResultsUrl());
+			}
 			for(Items items:defaultItems)
 			{
 				allItem.setMoreResultUrl(items.getMoreSearchResultsUrl());
@@ -83,7 +90,7 @@ public class ItemSearchService {
 							}
 						}
 						if(itemLinks != null)
-						log.info("Items:"+itemSearchTO.toString());	
+						//log.info("Items:"+itemSearchTO.toString());	
 						listSearchItem.add(itemSearchTO);
 					}
 				}
@@ -93,5 +100,10 @@ public class ItemSearchService {
 		}
 		
 		return allItem;
+	}
+	
+	public void getAllCategory()
+	{
+		this.itemDao.getAllCategories();
 	}
 }

@@ -24,6 +24,7 @@ public class AdminPageController {
 		log.info("Inside AdminPageController.openView");
 		ModelAndView model = new ModelAndView();
 		ItemAllTO allTO=this.itemSearchService.getDefaultItems();
+		itemSearchService.getAllCategory();
 		model.setViewName("dashboard_main");
 		model.addObject("allItem",allTO);
 		return model;

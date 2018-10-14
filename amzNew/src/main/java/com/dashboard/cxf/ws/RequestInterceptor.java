@@ -36,7 +36,7 @@ public class RequestInterceptor extends LoggingOutInterceptor {
             StringBuilder builder = new StringBuilder();
             cos.writeCacheTo(builder, limit);
             requestXml = builder.toString();
-            log.info("Request XML: \n" + requestXml);
+            //log.info("Request XML: \n" + requestXml);
        } catch (Exception e) {
        }
        }

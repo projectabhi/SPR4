@@ -45,7 +45,7 @@ public class ResponseInterceptor extends LoggingInInterceptor {
             StringBuilder builder = new StringBuilder();
             cos.writeCacheTo(builder, limit);
             responseXml = builder.toString();
-            log.info("Response XML: \n" + responseXml);
+            //log.info("Response XML: \n" + responseXml);
        } catch (Exception e) {
        }
        }
