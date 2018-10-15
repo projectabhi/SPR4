@@ -159,7 +159,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
  	<div id="RenderedSection" class="tab-pane fade active in">
  		<div id="RenderedResponseDiv" class="well-R">
  		<c:set var="itemOffers" value="${allItem}"/>
- 			<c:forEach var="item" items="${allItem.listIemSearh}">
+ 			<c:forEach var="item" items="${itemOffers.listIemSearh}">
  				<div class="product-box">
  					<a target="_blank" href="${item.detailPageURL}">
  						<img src="${item.mediumImgUrl}" height="160" width="120">
@@ -189,7 +189,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
  				<img src="../img/more_results.png" height="160" width="120">
  				<div>
  					<h4 style="text-align:center;">
- 						More Results
+ 						<a target="_blank" href="${itemOffers.moreResultUrl}">More Results</a>
  						<br>
  					</h4>
  				</div>
