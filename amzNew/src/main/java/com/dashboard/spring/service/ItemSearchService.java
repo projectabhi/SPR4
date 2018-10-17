@@ -16,6 +16,8 @@ import com.amazon.webservices.awsecommerceservice.ItemSearchResponse;
 import com.amazon.webservices.awsecommerceservice.Items;
 import com.dashboard.cxf.ws.AmazonClient;
 import com.dashboard.spring.dao.ItemDAO;
+import com.dashboard.spring.entity.MasterItemCategory;
+import com.dashboard.to.Categories;
 import com.dashboard.to.ItemAllTO;
 import com.dashboard.to.ItemSearchTO;
 
@@ -102,8 +104,21 @@ public class ItemSearchService {
 		return allItem;
 	}
 	
-	public void getAllCategory()
+	public List<Categories> getAllCategory()
 	{
-		this.itemDao.getAllCategories();
+		List<Categories> categoriesDsp=null;
+		List<MasterItemCategory>  categories=this.itemDao.getAllCategoriesJDBC();
+		if(categories != null && !categories.isEmpty()){
+			categoriesDsp=new ArrayList<Categories>();
+			for(MasterItemCategory masterItemCategory:categories)
+			{
+				Categories cg=new Categories();
+				cg.setCategoryId(masterItemCategory.getCategoryId());
+				cg.setCategoryName(masterItemCategory.getCategoryName());
+				cg.setCategoryDescription(masterItemCategory.getCatDescription());
+				categoriesDsp.add(cg);
+			}
+		}
+		return categoriesDsp;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,24 +23,10 @@ public class ItemDaoImpl implements ItemDAO {
 	Logger log = Logger.getLogger(ItemDaoImpl.class);
 	
 	@Autowired
-	private HibernateTemplate hibernateTemplate;
-	
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Override
-	public void getAllCategories() {
-		log.info("Using Hibernate .....");
-		List<MasterItemCategory> masterItemCategories= this.hibernateTemplate.loadAll(MasterItemCategory.class);
-		for(MasterItemCategory category:masterItemCategories)
-		{
-			log.info(category.getCategoryName());
-		}
-		this.getAllCategoriesJDBC();
-		//return null;
-	}
-	
-	public void getAllCategoriesJDBC() {
+	@Cacheable("empcache") 
+	public List<MasterItemCategory> getAllCategoriesJDBC() {
 		log.info("Using JDBCTemplate .....");
 		List<MasterItemCategory> masterItemCategories= this.jdbcTemplate.query("SELECT * FROM MASTER_ITEM_CATEGORY", new RowMapper<MasterItemCategory>(){  
 		    @Override  
@@ -52,11 +39,7 @@ public class ItemDaoImpl implements ItemDAO {
 		    }  
 		    });  
 		
-		for(MasterItemCategory category:masterItemCategories)
-		{
-			log.info(category.getCategoryName());
-		}
-		//return null;
+		return masterItemCategories;
 	}
 
 }

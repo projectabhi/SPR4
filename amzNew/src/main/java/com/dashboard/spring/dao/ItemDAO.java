@@ -1,8 +1,10 @@
 package com.dashboard.spring.dao;
 
-import com.dashboard.to.Categories;
+import java.util.List;
+
+import com.dashboard.spring.entity.MasterItemCategory;
 
 public interface ItemDAO {
 
-	public void getAllCategories();
+	public List<MasterItemCategory> getAllCategoriesJDBC() ;
 }
