@@ -10,19 +10,13 @@
 <link rel="stylesheet" href="../css/custom-min.css">
 <link rel="stylesheet" href="../css/fonts.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.js" /></script>
+<script type="text/javascript" src="../js/sockjs.js" /></script>
+<script type="text/javascript" src="../js/stomp.js" /></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="../js/customDbJquery.js"></script>
-<script>
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope, $http) {
-  $http.get("../services/getUserCount")
-  .then(function(response) {
-      $scope.myWelcome = response.data;
-  });
-});
-</script>
+<script type="text/javascript" src="../js/application.js" /></script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -112,9 +106,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
         <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <div ng-app="myApp" ng-controller="myCtrl">
-          <h3>{{myWelcome}}</h3>
-          </div>
+<!--           <div ng-app="myApp" ng-controller="myCtrl"> -->
+<!--           <h3>{{myWelcome}}</h3> -->
+<!--           </div> -->
+			<div id="clientMsg">
+				<h3 id="serverMsg"></h3>
+			</div>
         </div>
         <div class="w3-clear"></div>
         <h4>Users</h4>

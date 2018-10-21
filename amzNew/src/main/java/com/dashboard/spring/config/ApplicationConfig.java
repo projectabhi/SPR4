@@ -13,10 +13,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import com.dashboard.interceptor.CustomInterceptor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @EnableWebMvc
-@Import(value={HibernateConfiguration.class,SpringJDBCConfiguration.class})
+@Import(value={HibernateConfiguration.class,SpringJDBCConfiguration.class,WebSocketConfiguration.class})
 @ComponentScan(basePackages={"com.dashboard.spring"})
 public class ApplicationConfig extends WebMvcConfigurerAdapter{
 
@@ -34,10 +35,21 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter{
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
+
+	@Bean
+	public CustomInterceptor customInterceptor() {
+	    return new CustomInterceptor();
+	}
 	
 	@Override
-   public void addInterceptors(InterceptorRegistry registry) {
+	public void addInterceptors(InterceptorRegistry registry) {
       // Register guest interceptor with single path pattern
-      registry.addInterceptor(new CustomInterceptor()).addPathPatterns("/*");
-   }
+      registry.addInterceptor(customInterceptor()).addPathPatterns("/*");
+	}
+	
+	@Bean
+	public ObjectMapper objectMapper()
+	{
+		return new ObjectMapper();
+	}
 }
