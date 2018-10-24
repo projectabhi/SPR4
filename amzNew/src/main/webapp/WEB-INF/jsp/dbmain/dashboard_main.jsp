@@ -1,27 +1,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<title>13D Dashboard</title>
+<title>borokali Dashboard</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="../css/dboard_main.css">
-<link rel="stylesheet" href="../css/custom-min.css">
 <link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/custom-min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script type="text/javascript" src="../js/jquery.js" /></script>
-<script type="text/javascript" src="../js/sockjs.js" /></script>
-<script type="text/javascript" src="../js/stomp.js" /></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script type="text/javascript" src="../js/sockjs.js" /></script>
+  <script type="text/javascript" src="../js/stomp.js" /></script>
+  <script type="text/javascript" src="../js/application.js" /></script>
 <script src="../js/customDbJquery.js"></script>
-<script type="text/javascript" src="../js/application.js" /></script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
 <body class="w3-light-grey">
-
+<form id="srchFrm" method="post">
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
@@ -86,7 +86,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-blue w3-padding-16">
         <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>99</h3>
+          <div id="clientMsg">
+				<h3 id="serverMsg"></h3>
+			</div>
         </div>
         <div class="w3-clear"></div>
         <h4>Views</h4>
@@ -106,11 +108,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
         <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
         <div class="w3-right">
-<!--           <div ng-app="myApp" ng-controller="myCtrl"> -->
-<!--           <h3>{{myWelcome}}</h3> -->
-<!--           </div> -->
-			<div id="clientMsg">
-				<h3 id="serverMsg"></h3>
+			<div id="userMsg">
+				<h3 id="users">1</h3>
 			</div>
         </div>
         <div class="w3-clear"></div>
@@ -124,7 +123,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <div class="col-xs-8 col-xs-offset-2">
 		    <div class="input-group">
                 <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 34px;" onclick="">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 34px;" onclick="" aria-expanded="true">
                     	<span id="search_concept">Filter by</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -132,13 +131,17 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                     	<li><a href="${cat.categoryName}"><c:out value="${cat.categoryName}"></c:out></a></li>
                     </c:forEach>
                       <li class="divider"></li>
-                      <li><a href="#all">Anything</a></li>
+                      <li><a href="All">All</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
+                <spring:bind path="searchForm.searchIndex">
+                	<input type="hidden" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>" id="search_param">         
+                </spring:bind>
+                <spring:bind path="searchForm.keywords">
+                	<input type="text" id="<c:out value="${status.expression}"/>" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>" class="form-control" placeholder="Search term...">
+                </spring:bind>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="height: 34px;width: 50px;"><span class="glyphicon glyphicon-search"></span></button>
+                    <button id="searchButton" class="btn btn-default" type="button" style="height: 34px;width: 50px;"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
         </div>
@@ -187,6 +190,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
  		</div>
  	</div>
  </div>
+ 
   <div class="w3-panel">
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-third">
@@ -354,7 +358,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
-    <p>&copy; Abhijit Dey</p>
+    <p>&copy; borokali</p>
   </footer>
 
   <!-- End page content -->
@@ -384,6 +388,6 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-
+</form>
 </body>
 </html>

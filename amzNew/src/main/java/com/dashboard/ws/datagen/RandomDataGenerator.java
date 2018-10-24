@@ -1,7 +1,5 @@
 package com.dashboard.ws.datagen;
 
-import java.util.Random;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -10,6 +8,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.broker.BrokerAvailabilityEvent;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.dashboard.spring.service.ClientRequestService;
 
 @Component
 public class RandomDataGenerator implements
@@ -21,6 +21,9 @@ public class RandomDataGenerator implements
     
     @Autowired
     private SimpMessagingTemplate template;
+    
+    @Autowired
+    private ClientRequestService clientRequestService;
 
     @Autowired
     public RandomDataGenerator(
@@ -34,7 +37,7 @@ public class RandomDataGenerator implements
 
     @Scheduled(fixedDelay = 1000)
     public void sendDataUpdates() {
-    	Integer count=new Random().nextInt(100);
+    	Integer count=this.clientRequestService.getViews();
     	logger.info("Count:"+count);
         this.messagingTemplate.convertAndSend(
             "/data", count);

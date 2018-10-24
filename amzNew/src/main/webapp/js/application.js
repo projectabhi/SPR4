@@ -7,9 +7,9 @@ client.connect('user', 'password', function(frame) {
 
   client.subscribe("/data", function(message) {
 
-	  if($("#serverMsg").val() != '' || $("#serverMsg").val() != null)
-		  $("#serverMsg").val();
-    $("#serverMsg").val(message.body);
+	  if($("#serverMsg").html() != '' || $("#serverMsg").html() != null)
+		  $("#serverMsg").html();
+    $("#serverMsg").html(message.body);
   });
 
 });

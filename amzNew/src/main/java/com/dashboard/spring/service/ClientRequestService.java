@@ -150,4 +150,8 @@ public class ClientRequestService {
 	    return request.getHeader("User-Agent");
 	}
 
+	public Integer getViews()
+	{
+		return this.requestDao.getHitCount();
+	}
 }
