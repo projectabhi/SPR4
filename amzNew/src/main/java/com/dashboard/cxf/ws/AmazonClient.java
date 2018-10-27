@@ -14,7 +14,22 @@ import com.amazon.webservices.awsecommerceservice.AWSECommerceServicePortType;
 
 public class AmazonClient {
 
-	public static AWSECommerceServicePortType getClient(String action)
+	private static AmazonClient amazonClient;
+	
+	public static AmazonClient getInstance()
+	{
+		if(amazonClient == null){
+			synchronized (AmazonClient.class){
+				if(amazonClient == null){
+					amazonClient = new AmazonClient();
+				}
+			}
+		}
+		return amazonClient;
+	}
+	
+	
+	public AWSECommerceServicePortType getClient(String action)
 	{
 		AWSECommerceService awsecommerceservice = new AWSECommerceService();
 		awsecommerceservice.setHandlerResolver(new HandlerResolver() {

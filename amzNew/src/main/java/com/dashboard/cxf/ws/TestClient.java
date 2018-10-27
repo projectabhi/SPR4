@@ -19,7 +19,7 @@ public class TestClient {
 		/*element.setAWSAccessKeyId(AWS_ACCESS_KEY_ID);*/
 		element.setAssociateTag("amzborokali-21");
 		element.getRequest().add(request);
-		ItemSearchResponse response=AmazonClient.getClient("ItemSearch").itemSearch(element);
+		ItemSearchResponse response=AmazonClient.getInstance().getClient("ItemSearch").itemSearch(element);
 
 	}
 

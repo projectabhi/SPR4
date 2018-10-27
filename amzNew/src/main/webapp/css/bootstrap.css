@@ -1119,7 +1119,7 @@ img {
   border-radius: 6px;
 }
 .img-thumbnail {
-  padding: 4px;
+  padding: 1px;
   line-height: 1.42857143;
   background-color: #ffffff;
   border: 1px solid #dddddd;
@@ -1578,7 +1578,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1020px;
   }
 }
 .container-fluid {
@@ -4875,6 +4875,7 @@ a.badge:focus {
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
+  height:600px;	
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 4px;
@@ -4893,7 +4894,8 @@ a.thumbnail.active {
   border-color: #337ab7;
 }
 .thumbnail .caption {
-  padding: 9px;
+  padding: 4px;
+  height:600px;
   color: #333333;
 }
 .alert {

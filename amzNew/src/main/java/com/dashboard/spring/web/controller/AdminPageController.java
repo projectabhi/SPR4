@@ -16,6 +16,7 @@ import com.dashboard.form.SearchForm;
 import com.dashboard.spring.service.ItemSearchService;
 import com.dashboard.to.Categories;
 import com.dashboard.to.ItemAllTO;
+import com.dashboard.to.SearchedItems;
 
 @Controller
 public class AdminPageController {
@@ -45,7 +46,10 @@ public class AdminPageController {
 		log.info("Inside AdminPageController.searchSubmit");
 		log.info("Form"+form);
 		ModelAndView model = new ModelAndView();
+		SearchedItems searchedItems=this.itemSearchService.getSearchItems(form);
 		model.setViewName("dashboard_main");
+		model.addObject("searchPresent", searchedItems.getItems());
+		model.addObject("searchList", searchedItems.getDetailItemTOs());
 		return model;
 
 	}
