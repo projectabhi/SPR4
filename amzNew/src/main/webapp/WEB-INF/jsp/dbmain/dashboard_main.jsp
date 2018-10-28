@@ -7,15 +7,13 @@
 <title>Quick Search Amazon</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="../css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="../css/dboard_main.css">
 <link rel="stylesheet" href="../css/fonts.css">
 <link rel="stylesheet" href="../css/custom-min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/sockjs.js" /></script>
 <script type="text/javascript" src="../js/stomp.js" /></script>
 <script type="text/javascript" src="../js/application.js" /></script>
@@ -257,7 +255,7 @@ html, body, h1, h2, h3, h4, h5 {
 
 			<!-- Search Result -->
 
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<c:forEach var="srchLst" items="${searchList}" varStatus="theCount">
 						<div class="col-md-3">
@@ -266,30 +264,27 @@ html, body, h1, h2, h3, h4, h5 {
 								<div class="caption">
 									<h4 class="pull-right">${srchLst.formattedPrice}</h4>
 									<h6 small>
-										<a class="w3-bar w3-padding w3-tag"
-											href="${srchLst.detailPageUrl}">${srchLst.title}</a>
+										<a class="w3-bar w3-padding w3-tag"	
+											<c:if test="${srchLst.detailPageUrl ne null }"> href="${srchLst.detailPageUrl}" </c:if>>
+										${srchLst.title}
+										</a>
 									</h6>
-									<p style="height: 100px; overflow: auto;">${srchLst.editorReview}</p>
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="page">
-												<button type="button" class="bmd-modalButton"
-													data-toggle="modal"
-													data-bmdSrc="${srchLst.customerReviewUrl}"
-													data-bmdWidth="600" data-bmdHeight="450"
-													data-target="#myModal">Reviews</button>
-											</div>
-										</div>
+									<div  class="col-lg-12 col-md-12 col-sm-12" style="height:100px;overflow-y:auto;">
+									${srchLst.editorReview}
 									</div>
+								
 									<div class="space-ten"></div>
 									<div class="btn-ground text-center">
-										<button type="button" class="btn btn-primary">
-											<i class="fa fa-shopping-cart"></i> Add To Cart
+										<button type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="${srchLst.customerReviewUrl}"
+										data-bmdWidth="600" data-bmdHeight="450" data-target="#myModal" title="Reviews"><i class="fa fa-heartbeat"></i>
+										</button>
+										<button type="button" class="btn btn-primary" title="Add To Cart">
+											<i class="fa fa-shopping-cart"></i> 
 										</button>
 										<button type="button" class="btn btn-primary"
 											data-toggle="modal"
-											data-target="#product_view_${theCount.count}">
-											<i class="fa fa-search"></i> Quick View
+											data-target="#product_view_${theCount.count}" title="Quick View">
+											<i class="fa fa-search"></i> 
 										</button>
 									</div>
 									<div class="space-ten"></div>
@@ -302,19 +297,19 @@ html, body, h1, h2, h3, h4, h5 {
 
 			<!-- Populate Modal -->
 			<c:forEach var="srchLst" items="${searchList}" varStatus="theCount">
-				<div class="modal fade product_view"
-					id="product_view_${theCount.count}">
+				<div class="modal fade product_view" id="product_view_${theCount.count}">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<a href="#" data-dismiss="modal" class="class pull-right"><span
-									class="glyphicon glyphicon-remove"></span></a>
-								<h3 class="modal-title">HTML5 is a markup language</h3>
+								<a href="#" data-dismiss="modal" class="class pull-right">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+								<h3 class="modal-title">${srchLst.title}</h3>
 							</div>
 							<div class="modal-body">
 								<div class="row">
 									<div class="col-md-6 product_img">
-										<img src="${srchLst.mediumImgUrl}" class="img-responsive">
+										<img src="${srchLst.largeImgUrl}" class="img-responsive">
 									</div>
 									<div class="col-md-6 product_content">
 										<h4>
@@ -325,9 +320,10 @@ html, body, h1, h2, h3, h4, h5 {
 										</c:forEach>
 										<p></p>
 										<h3 class="cost">
-											<span class="glyphicon glyphicon-usd"></span>${srchLst.actualFormattedPrc}
-											<small class="pre-cost"><span
-												class="glyphicon glyphicon-usd"></span>${srchLst.formattedPrice}</small>
+											${srchLst.actualFormattedPrc}
+											<c:if test="${srchLst.formattedPrice ne null}"><small class="pre-cost">${srchLst.formattedPrice}</small></c:if>
+											<c:if test="${srchLst.saved ne null}">Saved Amount:<small class="pre-cost">${srchLst.saved}</small></c:if>
+											<c:if test="${srchLst.percentSaved ne null || srchLst.percentSaved != 0 }"><small class="pre-cost">${srchLst.percentSaved}</small>%</c:if>
 										</h3>
 										<div class="row">
 											<div class="col-md-4 col-sm-6 col-xs-12">
@@ -383,14 +379,10 @@ html, body, h1, h2, h3, h4, h5 {
 			</c:forEach>
 			<!-- Populate Modal -->
 			<!-- Search Result -->
-
-
-			<hr>
-
 			<hr>
 			<hr>
 			<hr>
-
+			<hr>
 			<div class="w3-container">
 				<h5>Recent Comments</h5>
 				<div class="w3-row">
@@ -409,19 +401,16 @@ html, body, h1, h2, h3, h4, h5 {
 						<br>
 					</div>
 				</div>
-
 				<div class="w3-row">
 					<div class="w3-col m2 text-center">
-						<img class="w3-circle" src="../img/medusa.jpg"
-							style="width: 96px; height: 96px">
+						<img class="w3-circle" src="../img/medusa.jpg" style="width: 96px; height: 96px">
 					</div>
 					<div class="w3-col m10 w3-container">
 						<h4>
 							Medusa <span class="w3-opacity w3-medium">Sep 28, 2014,
 								10:15 PM</span>
 						</h4>
-						<p>Sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua.</p>
+						<p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 						<br>
 					</div>
 				</div>
@@ -430,12 +419,9 @@ html, body, h1, h2, h3, h4, h5 {
 			<div class="modal fade" id="myModal">
 				<div class="modal-dialog">
 					<div class="modal-content bmd-modalContent">
-
 						<div class="modal-body">
-
 							<div class="close-button">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -443,7 +429,6 @@ html, body, h1, h2, h3, h4, h5 {
 								<iframe class="embed-responsive-item" frameborder="0"></iframe>
 							</div>
 						</div>
-
 					</div>
 					<!-- /.modal-content -->
 				</div>
@@ -453,36 +438,32 @@ html, body, h1, h2, h3, h4, h5 {
 
 			<!-- Footer -->
 			<footer class="w3-container w3-padding-16 w3-light-grey">
-				<p>&copy; borokali</p>
+				<p>&copy; BOROKALI</p>
 			</footer>
 
 			<!-- End page content -->
 		</div>
-
 		<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
-	</form>
+			var mySidebar = document.getElementById("mySidebar");
+			var overlayBg = document.getElementById("myOverlay");
+			
+			// Toggle between showing and hiding the sidebar, and add overlay effect
+			function w3_open() {
+			    if (mySidebar.style.display === 'block') {
+			        mySidebar.style.display = 'none';
+			        overlayBg.style.display = "none";
+			    } else {
+			        mySidebar.style.display = 'block';
+			        overlayBg.style.display = "block";
+			    }
+			}
+			
+			// Close the sidebar with the close button
+			function w3_close() {
+			    mySidebar.style.display = "none";
+			    overlayBg.style.display = "none";
+			}
+		</script>
+</form>
 </body>
 </html>
