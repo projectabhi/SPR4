@@ -1,6 +1,6 @@
 var randomData;
 
-var socket = new SockJS('/amzNew/dbmain/random');
+var socket = new SockJS('/dbmain/random');
 var client = Stomp.over(socket);
 
 client.connect('user', 'password', function(frame) {

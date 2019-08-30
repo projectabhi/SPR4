@@ -38,4 +38,15 @@ public class RequestDaoImpl implements RequestDao {
 		log.info("Total Hit:"+count);
 		return count;
 	}
+
+	@Override
+	@Cacheable("masterdata")
+	public String getMasterData(String paramName) {
+		log.info("paramName:"+paramName);
+		String paramValue=null;
+		StringBuffer sbf=new StringBuffer("SELECT PARAMETER_VALUE FROM DASHBOARD_MASTER WHERE PARAMETER_NAME=?");
+		paramValue=this.jdbcTemplate.queryForObject(sbf.toString(),new Object[]{paramName} ,String.class);
+		log.info("paramValue"+paramValue);
+		return paramValue;
+	}
 }

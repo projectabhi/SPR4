@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Configuration
 @EnableWebMvc
 @Import(value={HibernateConfiguration.class,SpringJDBCConfiguration.class,WebSocketConfiguration.class})
-@ComponentScan(basePackages={"com.dashboard.spring"})
+//@ComponentScan(basePackages={"com.dashboard.spring"})
 public class ApplicationConfig extends WebMvcConfigurerAdapter{
 
 	@Bean
