@@ -8,6 +8,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.BasicAttributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.ModificationItem;
@@ -89,5 +90,18 @@ public class LdapManager {
 		mods[0]=new ModificationItem(2, new BasicAttribute("status", "FALSE"));
 		mods[1]=new ModificationItem(2, new BasicAttribute("loginattempts", 0));
 		ctx.modifyAttributes(userDn, mods);
+	}
+	
+	public void addUser(String userId)
+	{
+		String userDn=createUserDN(userId);
+		Attributes attribs=new BasicAttributes();
+		Attribute objClass=new BasicAttribute("objectclass");
+		objClass.add("top");
+		objClass.add("person");
+		objClass.add("organizationalPerson");
+		objClass.add("inetOrgPerson");
+		objClass.add("ePerson");
+		attribs.put(objClass);
 	}
 }
